@@ -1,0 +1,50 @@
+import numpy as np
+
+A = np.array([
+	[0, 2, 1],
+	[1, -2, -3],
+	[2, 3, 1]
+], dtype=float)
+
+B = np.array([8, -11, -3], dtype=float)
+
+n = len(B)
+
+col_index = np.arange(n)
+
+for k in range(n - 1):
+	sub = abs(A[k:, k:])
+	row, col = np.unravel_index(np.argmax(sub), sub.shape)
+	row += k
+	col += k
+	A[[k, row]] = A[[row, k]]
+	B[[k, row]] = B[[row, k]]
+	A[:, [k, col]] = A[:, [col, k]]
+	col_index[[k, col]] = col_index[[col, k]]
+	for i in range(k + 1, n):
+		factor = A[i][k] / A[k][k]
+		for j in range(k, n):
+			A[i][j] -= factor * A[k][j]
+		B[i] -= factor * B[k]
+
+x = np.zeros(n)
+
+for i in range(n - 1, -1, -1):
+	sum_ax = 0
+	for j in range(i + 1, n):
+		sum_ax += A[i][j] * x[j]
+	x[i] = (B[i] - sum_ax) / A[i][i]
+
+final_x = np.zeros(n)
+
+for i in range(n):
+	final_x[col_index[i]] = x[i]
+
+if np.allclose(final_x, np.round(final_x)):
+	out = np.round(final_x).astype(int)
+else:
+	out = final_x
+
+print("Solution:")
+print(out)
+

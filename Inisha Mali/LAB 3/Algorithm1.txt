@@ -1,0 +1,10 @@
+1. Start.
+2. Input coefficient matrix A and vector B.
+3. Form augmented matrix [A|B].
+4. For each column:
+• Find largest pivot element.
+• Swap rows.
+• Eliminate lower elements.
+5. Perform back substitution.
+6. Display solution.
+7. Stop.

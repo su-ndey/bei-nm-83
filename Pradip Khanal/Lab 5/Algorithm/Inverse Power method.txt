@@ -1,0 +1,11 @@
+13. Start.
+14. Input matrix A, initial guess vector X, maximum iterations, and tolerance ε.
+15. Initialize λold = 0.
+16. Loop until the maximum iteration limit:
+a. Solve the linear system A · Y = X for Y.
+b. Find μ = Y[m], where |Y[m]| is the largest absolute value in Y.
+c. Normalize the vector: X = Y / μ.
+d. Compute the eigenvalue estimate: λnew = 1 / μ.
+e. If |λnew − λold| < ε, stop the loop early; otherwise set λold = λnew and continue.
+17. Display the smallest eigenvalue λnew and the corresponding normalized eigenvector X.
+18. Stop.

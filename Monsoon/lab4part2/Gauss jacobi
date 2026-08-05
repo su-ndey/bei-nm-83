@@ -1,0 +1,35 @@
+import numpy as np
+
+def gauss_jacobi(A, b, x0=None, tol=1e-5, max_iter=100):
+    A = A.astype(float)
+    b = b.astype(float)
+    n = len(b)
+    x = np.zeros(n) if x0 is None else x0.astype(float)
+    
+    for _ in range(max_iter):
+        x_new = np.zeros(n)
+        for i in range(n):
+            s = sum(A[i, j] * x[j] for j in range(n) if j != i)
+            x_new[i] = (b[i] - s) / A[i, i]
+        
+        if np.linalg.norm(x_new - x, ord=np.inf) < tol:
+            return x_new
+        
+        x = x_new
+        
+    return x
+
+
+# --- Example Function Call ---
+if __name__ == "__main__":
+    # System:
+    # 10x -  1y +  2z = 6
+    #  1x + 10y -  1z = 6
+    #  1x +  1y + 10z = 6
+    A = np.array([[10, -1, 2],
+                  [1, 10, -1],
+                  [1, 1, 10]])
+    b = np.array([6, 6, 6])
+
+    root = gauss_jacobi(A, b)
+    print("Solution (Gauss-Jacobi):", root)

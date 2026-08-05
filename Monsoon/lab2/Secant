@@ -1,0 +1,23 @@
+def secant(f, x0, x1, tol=1e-5, max_iter=100):
+    for _ in range(max_iter):
+        f_x0, f_x1 = f(x0), f(x1)
+        if f_x1 - f_x0 == 0:
+            raise ZeroDivisionError("Division by zero in Secant formula.")
+            
+        x2 = x1 - f_x1 * (x1 - x0) / (f_x1 - f_x0)
+        
+        if abs(x2 - x1) < tol or abs(f(x2)) < tol:
+            return x2
+            
+        x0, x1 = x1, x2
+
+    return x1
+
+
+# --- Example Function Call ---
+if __name__ == "__main__":
+    # Function: f(x) = x^3 - x - 2
+    f = lambda x: x**3 - x - 2
+    
+    root = secant(f, x0=1.0, x1=2.0)
+    print(f"Root found (Secant): {root}")

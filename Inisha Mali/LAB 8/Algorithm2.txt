@@ -1,0 +1,7 @@
+1. Initialize x = x0, y = y0, z = z0.
+2. For each step:
+• Compute k1, k2, k3, k4 for dy/dx.
+• Compute l1, l2, l3, l4 for dz/dx.
+• Update y and z using weighted average of slopes.
+• Increment x by h.
+3. Repeat for required number of steps.

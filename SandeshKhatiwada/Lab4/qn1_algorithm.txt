@@ -1,0 +1,15 @@
+1. Start.
+2. Input matrix A.
+3. Initialize:
+    L = I
+    U = 0
+4. Compute upper triangular matrix U.
+5. Compute lower triangular matrix L.
+6. Solve:
+    LY = B
+    using forward substitution.
+7. Solve:
+    UX = Y
+    using backward substitution.
+8. Display solution.
+9. Stop.

@@ -1,0 +1,6 @@
+1. Initialize x = x0, y = y0, z = z0.
+2. For each step:
+• Calculate slopes k1, l1, k2, l2 using RK2 formulas.
+• Update y and z using k2 and l2.
+• Increment x by h.
+3. Repeat for required number of steps.

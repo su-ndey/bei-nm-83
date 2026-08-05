@@ -1,0 +1,19 @@
+import numpy as np
+
+def simpson_13_rule(f, a, b, n):
+    if n % 2 != 0:
+        raise ValueError("Number of subintervals 'n' must be even for Simpson's 1/3 rule.")
+    
+    h = (b - a) / n
+    x = np.linspace(a, b, n + 1)
+    y = f(x)
+    
+    # 1/3 formula: h/3 * (y0 + 4*sum(odd_terms) + 2*sum(even_terms) + yn)
+    return (h / 3.0) * (y[0] + 4 * np.sum(y[1:-1:2]) + 2 * np.sum(y[2:-1:2]) + y[-1])
+
+
+# --- Example ---
+if __name__ == "__main__":
+    f = lambda x: x**2
+    result = simpson_13_rule(f, a=0, b=1, n=10)
+    print(f"Simpson's 1/3 Rule: {result:.6f}")

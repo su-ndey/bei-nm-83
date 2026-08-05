@@ -1,0 +1,8 @@
+1. Input the number of data points n.
+2. Input data points (xi, yi) and interpolation point xval.
+3. Initialize sum = 0.
+4. For each i = 0 to n − 1:
+• Initialize term = yi
+• Multiply by all (xval−xj)/(xi−xj) for j ̸= i
+• Add term to sum
+5. Output sum as f(xval)

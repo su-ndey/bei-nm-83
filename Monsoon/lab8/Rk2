@@ -1,0 +1,39 @@
+import numpy as np
+
+def rk2_second_order(f, t0, y0, dy0, h, steps):
+    t = np.zeros(steps + 1)
+    y = np.zeros(steps + 1)
+    v = np.zeros(steps + 1)  # v = dy/dt
+    
+    t[0], y[0], v[0] = t0, y0, dy0
+    
+    for i in range(steps):
+        # Current state
+        ti, yi, vi = t[i], y[i], v[i]
+        
+        # Predictor step (Euler)
+        k1_y = vi
+        k1_v = f(ti, yi, vi)
+        
+        y_pred = yi + h * k1_y
+        v_pred = vi + h * k1_v
+        
+        # Corrector step (Heun's RK2)
+        k2_y = v_pred
+        k2_v = f(ti + h, y_pred, v_pred)
+        
+        y[i + 1] = yi + (h / 2.0) * (k1_y + k2_y)
+        v[i + 1] = vi + (h / 2.0) * (k1_v + k2_v)
+        t[i + 1] = ti + h
+        
+    return t, y, v
+
+# --- Example: Harmonic Oscillator y'' + y = 0 ---
+if __name__ == "__main__":
+    # y'' = -y  =>  f(t, y, y') = -y
+    f = lambda t, y, dy: -y
+    
+    # Solve from t=0 to t=10 with y(0)=1, y'(0)=0
+    t, y, dy = rk2_second_order(f, t0=0, y0=1.0, dy0=0.0, h=0.1, steps=100)
+    
+    print(f"y(10) estimate using RK2: {y[-1]:.5f}")

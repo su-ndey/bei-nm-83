@@ -1,0 +1,24 @@
+def newton_raphson(f, df, x0, tol=1e-5, max_iter=100):
+    for _ in range(max_iter):
+        if df(x0) == 0:
+            raise ZeroDivisionError("Derivative is zero. No solution found.")
+        
+        x1 = x0 - f(x0) / df(x0)
+        
+        if abs(x1 - x0) < tol or abs(f(x1)) < tol:
+            return x1
+            
+        x0 = x1
+
+    return x0
+
+
+# --- Example Function Call ---
+if __name__ == "__main__":
+    # Function: f(x) = x^3 - x - 2
+    f = lambda x: x**3 - x - 2
+    # Derivative: f'(x) = 3x^2 - 1
+    df = lambda x: 3*x**2 - 1
+    
+    root = newton_raphson(f, df, x0=1.5)
+    print(f"Root found (Newton-Raphson): {root}")

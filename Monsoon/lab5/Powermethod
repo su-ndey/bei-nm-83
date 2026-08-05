@@ -1,0 +1,31 @@
+import numpy as np
+
+def power_method(A, x0=None, tol=1e-5, max_iter=100):
+    A = A.astype(float)
+    n = A.shape[0]
+    x = np.ones(n) if x0 is None else x0.astype(float)
+    
+    lambda_old = 0.0
+
+    for _ in range(max_iter):
+        x_next = np.dot(A, x)
+        lambda_new = np.max(np.abs(x_next))  # Dominant eigenvalue approximation
+        x = x_next / lambda_new              # Normalize vector
+
+        if abs(lambda_new - lambda_old) < tol:
+            return lambda_new, x
+
+        lambda_old = lambda_new
+
+    return lambda_new, x
+
+
+# --- Example Function Call ---
+if __name__ == "__main__":
+    A = np.array([[4, 1, 0],
+                  [1, 2, 1],
+                  [0, 1, 1]])
+
+    eigenvalue, eigenvector = power_method(A)
+    print("Dominant Eigenvalue:", eigenvalue)
+    print("Eigenvector:", eigenvector)

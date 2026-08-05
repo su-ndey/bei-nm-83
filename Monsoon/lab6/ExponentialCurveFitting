@@ -1,0 +1,39 @@
+import numpy as np
+import matplotlib.pyplot as plt
+
+def exponential_fit(x, y):
+    x = np.array(x, dtype=float)
+    y = np.array(y, dtype=float)
+    
+    # Linearize: ln(y) = ln(a) + b*x
+    Y = np.log(y)
+    n = len(x)
+    
+    # Solve system for ln(a) and b using least squares formulas
+    b = (n * np.sum(x * Y) - np.sum(x) * np.sum(Y)) / (n * np.sum(x**2) - (np.sum(x))**2)
+    ln_a = (np.sum(Y) - b * np.sum(x)) / n
+    a = np.exp(ln_a)
+    
+    return a, b
+
+# --- Example & Plotting ---
+if __name__ == "__main__":
+    x_data = np.array([1, 2, 3, 4, 5])
+    y_data = np.array([2.5, 6.0, 15.2, 40.0, 105.0])
+
+    a, b = exponential_fit(x_data, y_data)
+    print(f"Fitted Model: y = {a:.4f} * e^({b:.4f} * x)")
+
+    # Visualization
+    x_dense = np.linspace(min(x_data), max(x_data), 100)
+    y_dense = a * np.exp(b * x_dense)
+
+    plt.figure(figsize=(6, 4))
+    plt.scatter(x_data, y_data, color='red', label='Data Points')
+    plt.plot(x_dense, y_dense, label=f'Fit: $y = {a:.2f}e^{{{b:.2f}x}}$', color='blue')
+    plt.title('Exponential Curve Fitting')
+    plt.xlabel('x')
+    plt.ylabel('y')
+    plt.legend()
+    plt.grid(True)
+    plt.show()

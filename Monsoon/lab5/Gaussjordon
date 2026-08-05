@@ -1,0 +1,36 @@
+import numpy as np
+
+def gauss_jordan(A, b):
+    A = A.astype(float)
+    b = b.astype(float)
+    n = len(b)
+    
+    # Create augmented matrix [A | b]
+    aug = np.hstack([A, b.reshape(-1, 1)])
+
+    for i in range(n):
+        # Partial Pivoting
+        max_row = i + np.argmax(np.abs(aug[i:, i]))
+        if max_row != i:
+            aug[[i, max_row]] = aug[[max_row, i]]
+
+        # Make pivot element 1
+        aug[i] /= aug[i, i]
+
+        # Eliminate current column in all other rows
+        for j in range(n):
+            if i != j:
+                aug[j] -= aug[j, i] * aug[i]
+
+    return aug[:, -1]
+
+
+# --- Example Function Call ---
+if __name__ == "__main__":
+    A = np.array([[2, 1, -1],
+                  [-3, -1, 2],
+                  [-2, 1, 2]])
+    b = np.array([8, -11, -3])
+
+    x = gauss_jordan(A, b)
+    print("Solution (Gauss-Jordan):", x)

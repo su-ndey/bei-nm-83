@@ -1,0 +1,33 @@
+import numpy as np
+
+def inverse_power_method(A, x0=None, tol=1e-5, max_iter=100):
+    A = A.astype(float)
+    n = A.shape[0]
+    x = np.ones(n) if x0 is None else x0.astype(float)
+
+    lambda_old = 0.0
+
+    for _ in range(max_iter):
+        # Solve A * y = x (equivalent to y = inv(A) * x)
+        y = np.linalg.solve(A, x)
+        mu = np.max(np.abs(y))               # Approximates 1 / smallest_eigenvalue
+        x = y / mu                            # Normalize vector
+        lambda_new = 1.0 / mu                # Smallest eigenvalue
+
+        if abs(lambda_new - lambda_old) < tol:
+            return lambda_new, x
+
+        lambda_old = lambda_new
+
+    return lambda_new, x
+
+
+# --- Example Function Call ---
+if __name__ == "__main__":
+    A = np.array([[4, 1, 0],
+                  [1, 2, 1],
+                  [0, 1, 1]])
+
+    eigenvalue, eigenvector = inverse_power_method(A)
+    print("Smallest Eigenvalue:", eigenvalue)
+    print("Eigenvector:", eigenvector)

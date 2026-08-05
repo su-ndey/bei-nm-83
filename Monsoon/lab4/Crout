@@ -1,0 +1,45 @@
+import numpy as np
+
+def crout_lu(A, b):
+    A = A.astype(float)
+    b = b.astype(float)
+    n = len(b)
+
+    L = np.zeros((n, n))
+    U = np.eye(n)
+
+    # LU Factorization
+    for j in range(n):
+        # Calculate Lower Triangular Matrix L
+        for i in range(j, n):
+            L[i, j] = A[i, j] - sum(L[i, k] * U[k, j] for k in range(j))
+
+        # Calculate Upper Triangular Matrix U
+        for i in range(j + 1, n):
+            U[j, i] = (A[j, i] - sum(L[j, k] * U[k, i] for k in range(j))) / L[j, j]
+
+    # Forward Substitution: L * y = b
+    y = np.zeros(n)
+    for i in range(n):
+        y[i] = (b[i] - sum(L[i, k] * y[k] for k in range(i))) / L[i, i]
+
+    # Back Substitution: U * x = y
+    x = np.zeros(n)
+    for i in range(n - 1, -1, -1):
+        x[i] = y[i] - sum(U[i, k] * x[k] for k in range(i + 1, n))
+
+    return x, L, U
+
+
+# --- Example Function Call ---
+if __name__ == "__main__":
+    A = np.array([[2, 3, 1],
+                  [4, 7, 5],
+                  [6, 18, 19]])
+    b = np.array([9, 25, 67])
+
+    x, L, U = crout_lu(A, b)
+
+    print("Solution x:", x)
+    print("L Matrix:\n", L)
+    print("U Matrix:\n", U)

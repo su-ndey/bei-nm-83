@@ -1,0 +1,30 @@
+step 1.
+        Start.
+step 2.
+        Define function f(x).
+step 3. 
+       Input initial guesses a, b, tolerance ε, and maximum iterations.
+step 4.
+     Check:
+        f(a) × f(b) < 0
+        If false, stop and display “Invalid interval”.
+step 5. 
+       Compute:
+    c =(a + b)/2
+step 6. 
+       If: f(c) = 0
+       then c is the root; 
+       Stop.
+step 7. 
+       Else if:
+    f(a) × f(c) < 0
+    set b = c.
+step 8.
+        Else set a = c.
+step 9.
+        Repeat until:
+        |b − a| < ε
+step 10.
+         Display approximate root.
+step 11. 
+         Stop.

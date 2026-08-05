@@ -1,0 +1,39 @@
+import numpy as np
+
+def rk4_system(F, t0, Y0, h, steps):
+    Y0 = np.array(Y0, dtype=float)
+    t = np.zeros(steps + 1)
+    Y = np.zeros((steps + 1, len(Y0)))
+    
+    t[0] = t0
+    Y[0] = Y0
+    
+    for i in range(steps):
+        ti = t[i]
+        Yi = Y[i]
+        
+        k1 = np.array(F(ti, Yi))
+        k2 = np.array(F(ti + 0.5 * h, Yi + 0.5 * h * k1))
+        k3 = np.array(F(ti + 0.5 * h, Yi + 0.5 * h * k2))
+        k4 = np.array(F(ti + h, Yi + h * k3))
+        
+        Y[i + 1] = Yi + (h / 6.0) * (k1 + 2 * k2 + 2 * k3 + k4)
+        t[i + 1] = ti + h
+        
+    return t, Y
+
+# --- Example: Lotka-Volterra Predator-Prey System ---
+if __name__ == "__main__":
+    # dx/dt = alpha*x - beta*x*y
+    # dy/dt = delta*x*y - gamma*y
+    def predator_prey(t, Y):
+        x, y = Y
+        alpha, beta, delta, gamma = 1.1, 0.4, 0.1, 0.4
+        dxdt = alpha * x - beta * x * y
+        dydt = delta * x * y - gamma * y
+        return [dxdt, dydt]
+
+    # Initial conditions: x(0)=10 prey, y(0)=10 predators
+    t, Y = rk4_system(predator_prey, t0=0, Y0=[10.0, 10.0], h=0.1, steps=100)
+    
+    print(f"At t={t[-1]:.1f} -> Prey: {Y[-1, 0]:.3f}, Predators: {Y[-1, 1]:.3f}")

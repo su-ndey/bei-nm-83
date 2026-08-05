@@ -1,0 +1,12 @@
+1. Input the number of data points n.
+2. Initialize sums: Px,PY ,Px2,PxY to 0.
+
+3. For each data point (xi, yi):
+
+
+• Compute Yi = ln yi
+• Accumulate: Px,PY ,Px^2,PxY
+
+4. Compute B, a, and A = e^a
+
+5. Print the exponential curve: y = Ae^Bx

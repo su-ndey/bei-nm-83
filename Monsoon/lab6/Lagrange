@@ -1,0 +1,33 @@
+import numpy as np
+import matplotlib.pyplot as plt
+
+def lagrange_interpolation(x_points, y_points, x):
+    total = 0.0
+    n = len(x_points)
+    for i in range(n):
+        # Calculate basis polynomial L_i(x)
+        term = y_points[i]
+        for j in range(n):
+            if i != j:
+                term *= (x - x_points[j]) / (x_points[i] - x_points[j])
+        total += term
+    return total
+
+# --- Example & Plotting ---
+if __name__ == "__main__":
+    x_data = np.array([0, 1, 3, 4])
+    y_data = np.array([1, 3, 2, 5])
+
+    # Visualization
+    x_dense = np.linspace(min(x_data), max(x_data), 100)
+    y_dense = [lagrange_interpolation(x_data, y_data, xi) for xi in x_dense]
+
+    plt.figure(figsize=(6, 4))
+    plt.scatter(x_data, y_data, color='red', zorder=5, label='Data Points')
+    plt.plot(x_dense, y_dense, label='Lagrange Polynomial', color='green')
+    plt.title('Lagrange Interpolation')
+    plt.xlabel('x')
+    plt.ylabel('y')
+    plt.legend()
+    plt.grid(True)
+    plt.show()

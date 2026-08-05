@@ -1,0 +1,11 @@
+1. Input lower limit x0, upper limit xn, and number of sub-intervals n.
+2. Compute step size: h =
+xn−x0
+n
+3. Compute sum = f(x0) + f(xn)
+4. For i = 1 to n − 1:
+• x = x0 + i · h
+• Add f(x) to sum
+5. Compute result: Area = h
+2
+· sum

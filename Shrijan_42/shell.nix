@@ -19,5 +19,8 @@ pkgs.mkShell {
 
   shellHook = ''
     echo "Numerical Methods dev shell (Python + numpy + sympy)"
+    echo "Lab scripts live in subfolders — run from here, e.g.:"
+    echo "  python lab4/ex1.py"
+    echo "  python lab3/ex1.py"
   '';
 }

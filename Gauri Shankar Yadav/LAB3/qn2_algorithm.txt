@@ -1,0 +1,10 @@
+1. Start.
+2. Input matrix A and vector B.
+3. Search largest pivot in submatrix.
+4. Swap rows and columns.
+5. Perform elimination.
+6. Repeat for all pivots.
+7. Perform back substitution.
+8. Rearrange solution variables.
+9. Display solution.
+10. Stop.
