@@ -1,0 +1,13 @@
+1. Start.
+2. Input matrix A.
+3. Initialize:
+    L = 0
+    U = I
+4. Compute lower matrix L.
+5. Compute upper matrix U.
+6. Solve:
+    LY = B
+7. Solve:
+    UX = Y
+8. Display solution.
+9. Stop.
