@@ -1,0 +1,12 @@
+1. Input x0, xn, and n (must be divisible by 3).
+2. Compute h =
+xn−x0
+n
+
+3. Compute sum = f(x0) + f(xn)
+4. For i = 1 to n − 1:
+• If i mod 3 == 0, add 2 · f(x) to sum
+• Else, add 3 · f(x) to sum
+5. Compute result: Area = 3h
+8
+· sum

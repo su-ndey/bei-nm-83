@@ -1,0 +1,12 @@
+7. Start.
+8. Input matrix A, initial guess vector X (commonly all ones), maximum iterations, and
+tolerance ε.
+9. Initialize λold = 0.
+10. Loop until the maximum iteration limit:
+a. Compute Y = A · X.
+b. Find λnew = Y[m], where |Y[m]| is the largest absolute value in Y.
+c. Normalize the vector for the next step: X = Y / λnew.
+d. Compute the error |λnew − λold|.
+e. If error < ε, stop the loop early; otherwise set λold = λnew and continue.
+11. Display the dominant eigenvalue λnew and the corresponding normalized eigenvector X.
+12. Stop.

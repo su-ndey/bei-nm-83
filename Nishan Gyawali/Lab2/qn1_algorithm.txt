@@ -1,0 +1,12 @@
+1. Start.
+2. Define function f(x).
+3. Input initial guesses x0, x1, tolerance ε, and maximum iterations.
+4. Compute:
+    xn+1 = xn −[f(xn)(xn − xn−1)] / [f(xn) − f(xn−1)]
+5. If: |xn+1 − xn| < ε
+    then stop.
+6. Otherwise update:
+    xn−1 = xn, xn = xn+1
+7. Repeat until convergence.
+8. Display approximate root.
+9. Stop.

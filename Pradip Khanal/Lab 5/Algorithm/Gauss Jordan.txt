@@ -1,0 +1,10 @@
+1. Start.
+2. Accept matrix A and constraint vector B.
+3. Form the augmented matrix [A | B].
+4. For each pivot index k from 0 to n-1:
+a. If |A[k][k]| is close to zero, swap with a row below that has a non-zero entry in column
+k.
+b. Divide row k by the pivot value A[k][k] so the diagonal entry becomes 1.
+c. For every row i ≠ k, subtract (A[i][k] × row k) from row i to eliminate column k.
+5. Repeat until all columns are processed; B now holds the solution vector X.
+6. Stop.

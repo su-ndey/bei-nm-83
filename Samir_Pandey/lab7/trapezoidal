@@ -1,0 +1,12 @@
+def f(x):
+    return 1/(1+ x**3)
+x0 = float(input("enter lower"))
+xn = float(input("enter upper"))
+n = int(input("enter number of intervals"))
+h = (xn - x0) / n
+s = f(x0) + f(xn)
+for i in range(1, n):
+    x = x0 + i * h
+    s += 2 * f(x)
+result = s * (h / 2)
+print("The result of the integration is:", result)  

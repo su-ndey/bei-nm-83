@@ -1,0 +1,11 @@
+1. Input x0, xn, and n (must be even).
+2. Compute step size h =
+xn−x0
+n
+3. Compute sum = f(x0) + f(xn)
+4. For i = 1 to n − 1:
+• If i is even, add 2 · f(x) to sum
+• If i is odd, add 4 · f(x) to sum
+5. Compute result: Area = h/
+3
+· sum
