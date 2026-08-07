@@ -1,0 +1,27 @@
+def f(x):
+    return x**3 - x - 2
+
+a = 1
+b = 2
+tolerance = 0.0001
+max_iter = 100
+
+if f(a) * f(b) >= 0:
+    print("Invalid interval. Root is not bracketed.")
+else:
+    for i in range(max_iter):
+        if abs(b - a) < tolerance:
+            c = (a + b) / 2
+            print(f"Approximate root found: {c}")
+            break
+        c = (a + b) / 2
+        print(f"Iteration {i + 1}: c = {c}")
+        if f(c) == 0:
+            print("Exact root found:", c)
+            break
+        if f(a) * f(c) < 0:
+            b = c  
+        else:
+            a = c  
+    else:
+        print("Reached max iterations without reaching desired tolerance.")
